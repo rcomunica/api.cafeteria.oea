@@ -10,6 +10,20 @@ Cada recurso expone `create.php`, `read.php`, `update.php` y `delete.php`. Las o
 
 Recursos: `users`, `products`, `orders`, `order_items`, `payments` y `payment_notifications`.
 
+### Imagenes de productos
+
+`products/create.php` y `products/update.php` aceptan `multipart/form-data`. Envia la imagen en el campo `image` junto con los campos del producto. Se aceptan JPG, PNG, WEBP y GIF de hasta 5 MB; la respuesta y el registro usan `image_url` con la ruta publica de la imagen.
+
+```text
+curl -X POST /products/create.php \
+  -H "Authorization: Bearer TOKEN" \
+  -F "name=Cafe" \
+  -F "category=Bebidas" \
+  -F "price=5000" \
+  -F "qty=10" \
+  -F "image=@/ruta/cafe.jpg"
+```
+
 ## Autenticacion
 
 El registro es publico y crea siempre usuarios con rol `student`:
