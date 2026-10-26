@@ -10,6 +10,19 @@ Cada recurso expone `create.php`, `read.php`, `update.php` y `delete.php`. Las o
 
 Recursos: `users`, `products`, `orders`, `order_items`, `payments` y `payment_notifications`.
 
+### Webhook de Wompi
+
+Configura en Wompi la URL pública `payment_notifications/webhook.php`. Este endpoint no
+requiere autenticación y recibe eventos `transaction.updated`. Busca el pago por
+`data.transaction.reference`, guarda la notificación y actualiza de forma atómica:
+
+- `APPROVED`: pago `approved`, orden `paid` y `paid_at`.
+- `DECLINED`, `VOIDED` o `ERROR`: pago `rejected` y orden `cancelled`.
+- Otros estados: pago `pending`, sin cerrar la orden.
+
+La vista `payment_notifications/processing.php` muestra el mensaje para que el usuario
+vuelva a la aplicación mientras Wompi confirma el resultado.
+
 ### Imagenes de productos
 
 `products/create.php` y `products/update.php` aceptan `multipart/form-data`. Envia la imagen en el campo `image` junto con los campos del producto. Se aceptan JPG, PNG, WEBP y GIF de hasta 5 MB; la respuesta y el registro usan `image_url` con la ruta publica de la imagen.

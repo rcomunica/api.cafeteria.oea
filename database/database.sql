@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS order_items (
 CREATE TABLE IF NOT EXISTS payments (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     order_id INT UNSIGNED NOT NULL,
-    provider ENUM('nequi') NOT NULL DEFAULT 'nequi',
+    provider ENUM('wompi') NOT NULL DEFAULT 'wompi',
     transaction_reference VARCHAR(120) NULL UNIQUE,
     amount DECIMAL(10, 2) NOT NULL,
     status ENUM(
